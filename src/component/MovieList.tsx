@@ -8,7 +8,7 @@ interface IMovieList {
 
 const MovieList: React.FC<IMovieList> = (props) => {
     return (
-        <div className="app__movie-list">
+        <div className="movie-app__movie-list movie-list">
             {props.items.map(movie => <MovieCard key={movie.id} {...movie}/>)}
         </div>
     )

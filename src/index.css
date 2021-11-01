@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.app {
+    background-color: darkgray;
+}
+.movie-app {
+    background-color: ghostwhite;
+    width: 1010px;
+    height: 1147px;
+}
+.movie-app__container {
+    margin: auto;
+    padding: 15px;
+}
+.movie-list {
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+.movie-list__item {
+    margin: 15px;
+}
+.movie-card {
+    display: flex;
+    font-family: 'Inter', sans-serif;
+    width: 454px;
+    height: 281px;
+    -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+}
+.movie-card-img {
+    height: 281px;
+    min-width: 183px;
+}
+.movie-card-img img {
+    width: 100%;
+    height: 100%;
+}
+.movie-card-desc {
+    padding: 12px 20px 12px 20px;
+}
+.movie-card-desc__item {
+    margin-bottom: 8px;
+}
+.movie-card-desc-title {
+    font-size: 20px;
+    line-height: 28px;
+
+}
+.movie-card-desc-date {
+    font-size: 12px;
+    line-height: 22px;
+}
+.movie-card-desc-tag {
+    font-size: 12px;
+    line-height: 15px;
+}
+.movie-card-desc-text {
+    font-size: 12px;
+    line-height: 22px;
+    max-height: 130px;
+    overflow: hidden;
+}
