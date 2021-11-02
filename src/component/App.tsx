@@ -4,8 +4,9 @@ import "antd/dist/antd.css";
 import { Skeleton, Alert } from 'antd';
 import IMovie from '../types/data';
 import MovieList from './MovieList';
+import InputMovie from './Input';
 import SwapiService from '../services/services';
-import { on } from 'stream';
+import PaginationMovie from './Pagination';
 
 const App: React.FC = () => {
     const [dataMovies, setDataMovies] = useState<IMovie[]>([])
@@ -25,16 +26,18 @@ const App: React.FC = () => {
         setLoading(false)
         setAlert(true)
     }
-    const hasData = !(loading || alert)
+    const hasData: boolean = !(loading || alert)
     const errorAlert: any = alert ? <Alert message="Error" description="Loading error" type="error" showIcon/> : null
     const skeleton: any = loading ? <Skeleton paragraph={{ rows: 16 }}/> : null
     const movieList: any = hasData ? <MovieList items={dataMovies} /> : null
     return (
         <div className="app">
             <div className="movie-app movie-app__container">
+                <InputMovie />
                 {errorAlert}
                 {skeleton}
                 {movieList}
+                <PaginationMovie />
             </div>
         </div>
     )

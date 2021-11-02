@@ -23,7 +23,7 @@ body {
     
 }
 .movie-list__item {
-    margin: 15px;
+    margin: 18px;
 }
 .movie-card {
     display: flex;
@@ -67,6 +67,10 @@ body {
     max-height: 130px;
     overflow: hidden;
 }
-.spin {
-    margin: auto;
+.movie-app__movie-input {
+    margin: 15px;
+}
+.movie-app__movie-pagination {
+    margin: 15px;
+    text-align: center;
 }
