@@ -67,3 +67,6 @@ body {
     max-height: 130px;
     overflow: hidden;
 }
+.spin {
+    margin: auto;
+}
