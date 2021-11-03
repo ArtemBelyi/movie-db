@@ -15,16 +15,19 @@ const App: React.FC = () => {
     const listMovie = new SwapiService()
     
     useEffect(() => {
-        listMovie.getResource('star').then((data) => {
-            setDataMovies(data.slice(0, 6))
-            setLoading(false)
-            setAlert(false)
-        }).catch(onError)
+        searchMovie('')
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     const onError = ():void => {
         setLoading(false)
         setAlert(true)
+    }
+    const searchMovie = (str: string) => {
+        listMovie.getResource(str).then((data) => {
+            setDataMovies(data.slice(0, 6))
+            setLoading(false)
+            setAlert(false)
+        }).catch(onError)
     }
     const hasData: boolean = !(loading || alert)
     const errorAlert: any = alert ? <Alert message="Error" description="Loading error" type="error" showIcon/> : null
@@ -33,7 +36,7 @@ const App: React.FC = () => {
     return (
         <div className="app">
             <div className="movie-app movie-app__container">
-                <InputMovie />
+                <InputMovie searchMovie={searchMovie}/>
                 {errorAlert}
                 {skeleton}
                 {movieList}

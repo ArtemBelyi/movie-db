@@ -5,7 +5,8 @@ export default class SwapiService {
     readonly API_KEY: string = `api_key=addc3964774b2cc7dd5935c2545b30d8`
 
     getResource = async (url: string): Promise<IMovie[]> => {
-        let response = await fetch(`${this.searchMovie}?${this.API_KEY}&query=${url}`)
+        const URL = url || 'star'
+        let response = await fetch(`${this.searchMovie}?${this.API_KEY}&query=${URL}`)
         let { results } = await response.json()
         if (!results) {
             const e = new Error('Неверный адрес');
