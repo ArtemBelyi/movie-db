@@ -11,7 +11,7 @@ body {
 .movie-app {
     background-color: ghostwhite;
     width: 1010px;
-    height: 1147px;
+    min-height: 100vh;
 }
 .movie-app__container {
     margin: auto;

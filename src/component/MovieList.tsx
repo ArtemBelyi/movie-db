@@ -1,5 +1,5 @@
 import React from 'react';
-import IMovie from '../types/data';
+import { IMovie } from '../types/data';
 import MovieCard from './MovieCard';
 
 interface IMovieList {

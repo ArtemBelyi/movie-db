@@ -1,19 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import "antd/dist/antd.css"
 import { Pagination } from 'antd';
 
+interface IPages {
+    page: number,
+    totalPages: number,
+    changePage: Function
+}
 
-const PaginationMovie: React.FC = () => {
-    const [currentPage, setCurrentPage] = useState<number>(1)
+const PaginationMovie: React.FC<IPages> = (props) => {
 
     const onChange = (page: number) => {
-        console.log(page)
-        setCurrentPage(page)
+        props.changePage(page)
     }
     
     return (
         <div className="movie-app__movie-pagination movie-pagination">
-            <Pagination current={currentPage} onChange={onChange} total={40} />
+            <Pagination current={props.page} total={props.totalPages} defaultPageSize={20} showSizeChanger={false} onChange={onChange}/>
         </div>
     )
 }
