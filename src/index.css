@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
+::-webkit-scrollbar { /* chrome based */
+    width: 0px;  /* ширина scrollbar'a */
+    background: transparent;  /* опционально */
+}
+
+html {
+    -ms-overflow-style: none;  /* IE 10+ */
+    scrollbar-width: none; /* Firefox */
+}
+
 body {
     padding: 0;
     margin: 0;
@@ -43,15 +53,17 @@ body {
     height: 100%;
 }
 .movie-card-desc {
-    padding: 12px 20px 12px 20px;
+    padding: 10px 18px 10px 18px;
+    position: relative;
+    min-width: 271px;
 }
 .movie-card-desc__item {
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 .movie-card-desc-title {
     font-size: 20px;
     line-height: 28px;
-
+    width: 85%;
 }
 .movie-card-desc-date {
     font-size: 12px;
@@ -67,10 +79,24 @@ body {
     max-height: 130px;
     overflow: hidden;
 }
+.movie-card-desc-rate {
+    position: absolute;
+    bottom: 0;
+}
 .movie-app__movie-input {
     margin: 15px;
 }
 .movie-app__movie-pagination {
     margin: 15px;
     text-align: center;
+}
+.movie-card-desc-vote {
+    position: absolute;
+    border: 2px solid #E90000;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    right: 10px;
 }

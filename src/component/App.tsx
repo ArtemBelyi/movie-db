@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import "antd/dist/antd.css";
-import { Skeleton, Alert } from 'antd';
+import { Skeleton, Alert, Tabs } from 'antd';
 import { IMovie } from '../types/data';
 import MovieList from './MovieList';
 import InputMovie from './Input';
@@ -16,6 +16,7 @@ const App: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(true)
     const [alert, setAlert] = useState<boolean>(false)
     const listMovie = new SwapiService()
+    const { TabPane } = Tabs
     
     useEffect(() => {
         listMovie.getResource(query, page).then((data) => {
@@ -43,11 +44,18 @@ const App: React.FC = () => {
     return (
         <div className="app">
             <div className="movie-app movie-app__container">
-                <InputMovie searchMovie={searchMovie}/>
-                {errorAlert}
-                {skeleton}
-                {movieList}
-                {!!totalPages && (<PaginationMovie totalPages={totalPages} page={page} changePage={changePage}/>)}
+                <Tabs defaultActiveKey="1" centered>
+                    <TabPane tab="Tab 1" key="1">
+                    <InputMovie searchMovie={searchMovie}/>
+                        {errorAlert}
+                        {skeleton}
+                        {movieList}
+                        {!!totalPages && (<PaginationMovie totalPages={totalPages} page={page} changePage={changePage}/>)}
+                    </TabPane>
+                    <TabPane tab="Tab 2" key="2">
+                        This content Tab 2
+                    </TabPane>
+                </Tabs>
             </div>
         </div>
     )
