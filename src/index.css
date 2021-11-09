@@ -60,6 +60,9 @@ body {
 .movie-card-desc__item {
     margin-bottom: 6px;
 }
+.movie-card-desc__item:nth-child(4) {
+    margin-bottom: 0px;
+}
 .movie-card-desc-title {
     font-size: 20px;
     line-height: 28px;
@@ -76,7 +79,7 @@ body {
 .movie-card-desc-text {
     font-size: 12px;
     line-height: 22px;
-    max-height: 130px;
+    max-height: 114px;
     overflow: hidden;
 }
 .movie-card-desc-rate {
@@ -92,11 +95,46 @@ body {
 }
 .movie-card-desc-vote {
     position: absolute;
-    border: 2px solid #E90000;
     font-size: 14px;
     text-align: center;
     border-radius: 50%;
     width: 30px;
     height: 30px;
     right: 10px;
+}
+.ant-tag {
+    font-size: 10px;
+    padding: 0 5px;
+    line-height: 16px;
+    margin-bottom: 4px;
+    margin-right: 4px;
+}
+@media (max-width: 1000px) {
+    .movie-app {
+        width: 100%;
+    }
+}
+@media (max-width: 500px) {
+    .movie-card{
+        width: 360px;
+        height: 251px;
+    }
+    .movie-card-img {
+        height: 181px;
+        min-width: 93px;
+    }
+    .movie-card-desc-text {
+        line-height: 18px;
+        max-height: 94px;
+    }
+    .movie-card-desc {
+        padding: 8px 12px 8px 12px;
+    }
+    .movie-card-desc-title {
+        font-size: 18px;
+        line-height: 24px;
+    }
+    .movie-card-desc-rate {
+        left: -10%;
+    }
 }

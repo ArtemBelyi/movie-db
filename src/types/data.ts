@@ -12,7 +12,8 @@ interface IMovie {
     title: string,
     video: boolean,
     vote_average: number,
-    vote_count: number
+    vote_count: number,
+    rating?: number
 }
 interface ImovieBd {
     page: number,
@@ -20,4 +21,11 @@ interface ImovieBd {
     total_pages: number,
     total_results: number
 }
-export type {IMovie, ImovieBd}
+interface IGenre {
+    id: number,
+    name: string
+}
+interface IGenreList {
+    genres: IGenre[]
+}
+export type {IMovie, ImovieBd, IGenre, IGenreList}

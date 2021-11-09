@@ -4,12 +4,13 @@ import MovieCard from './MovieCard';
 
 interface IMovieList {
     items: IMovie[]
+    setRateMovie: Function
 }
 
 const MovieList: React.FC<IMovieList> = (props) => {
     return (
         <div className="movie-app__movie-list movie-list">
-            {props.items.map(movie => <MovieCard key={movie.id} {...movie}/>)}
+            {props.items.map(movie => <MovieCard key={movie.id} item={movie} setRateMovie={props.setRateMovie}/>)}
         </div>
     )
 }

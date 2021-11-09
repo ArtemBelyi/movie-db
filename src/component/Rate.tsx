@@ -2,14 +2,19 @@ import React from 'react';
 import "antd/dist/antd.css"
 import { Rate } from 'antd';
 
-const RateMovie: React.FC = (props) => {
+interface IRate {
+    count: number,
+    id: number,
+    setRateMovie: Function
+}
+
+const RateMovie: React.FC<IRate> = (props) => {
 
     const onChange = (value: number) => {
-        console.log(value)
+        props.setRateMovie(props.id, value)
     }
-    
     return (
-        <Rate style={{ fontSize: 16 }} allowHalf onChange={onChange} count={10} />
+        <Rate style={{ fontSize: 16 }} allowHalf onChange={onChange} count={10} defaultValue={props.count} />
     )
 }
 export default RateMovie
