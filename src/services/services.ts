@@ -2,7 +2,7 @@ import { ImovieBd } from "../types/data"
 
 
 
-export default class SwapiService {
+export default class MoviesService {
     readonly URL_API: string = `https://api.themoviedb.org/3`
     readonly searchMovie: string = `https://api.themoviedb.org/3/search/movie`
     readonly API_KEY: string = `api_key=addc3964774b2cc7dd5935c2545b30d8`

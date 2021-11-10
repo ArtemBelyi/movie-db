@@ -12,6 +12,7 @@ interface IMovieCard {
 
 const MovieCard: React.FC<IMovieCard> = (props) => {
     const { id, original_title, release_date, overview, poster_path, vote_average, genre_ids, rating = 0 } = props.item
+    const poster = poster_path || '/mUP8yF2Q7x97pITZvuarEiyR5g2.jpg'
     const border = {
         get color() {
             if (vote_average > 7) return {border: '2px solid #66E900'}
@@ -20,10 +21,9 @@ const MovieCard: React.FC<IMovieCard> = (props) => {
             return {border: '2px solid #E90000'}
         }
     }
-    //border: 2px solid #E9D100;
     return (
         <div className="movie-list__item movie-card">
-            <div className="movie-card__item movie-card-img"><img src={`https://image.tmdb.org/t/p/w200/${poster_path}`} alt={`${original_title} img`}/></div>
+            <div className="movie-card__item movie-card-img"><img src={`https://image.tmdb.org/t/p/w200/${poster}`} alt={`${original_title} img`}/></div>
             <div className="movie-card__item movie-card-desc">
                 <div className="movie-card-desc__item movie-card-desc-vote" style={border.color} >{vote_average}</div>
                 <div className="movie-card-desc__item movie-card-desc-title">{original_title}</div>

@@ -95,6 +95,7 @@ body {
 }
 .movie-card-desc-vote {
     position: absolute;
+    padding-top: 1px;
     font-size: 14px;
     text-align: center;
     border-radius: 50%;
