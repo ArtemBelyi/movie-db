@@ -8,8 +8,9 @@ interface ITagList {
     idList: number[]
 }
 
-const TagGenres: React.FC<ITagList> = ({ idList }) => {
+const TagGenres = (props: ITagList) => {
 
+    const { idList } = props
     const value: IGenreList = useContext(GenresContext)
     const arr = value.genres.filter(item => idList.includes(item.id))
     

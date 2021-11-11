@@ -8,7 +8,7 @@ interface IPages {
     changePage: Function
 }
 
-const PaginationMovie: React.FC<IPages> = (props) => {
+const PaginationMovie = (props: IPages) => {
 
     const onChange = (page: number) => {
         props.changePage(page)

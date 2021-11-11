@@ -7,7 +7,7 @@ interface Iinput {
     searchMovie: Function
 }
 
-const InputMovie: React.FC<Iinput> = (props) => {
+const InputMovie = (props: Iinput) => {
 
     const changeValue = (event: any) => {
         props.searchMovie(event.target.value) 

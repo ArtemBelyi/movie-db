@@ -1,4 +1,4 @@
-import { ImovieBd } from "../types/data"
+import { ImovieBd, IGenreList } from "../types/data"
 
 
 
@@ -9,7 +9,7 @@ export default class MoviesService {
     readonly SESSION_ID: string = `907eb1a5788fdcd4b5082b84a82c806d` 
 
     getResource = async (url: string, page: number): Promise<ImovieBd> => {
-        const defaultUrl = url || 'star'
+        const defaultUrl: string = url || 'star'
         let response = await (await fetch(`${this.searchMovie}?${this.API_KEY}&page=${page}&query=${defaultUrl}`)).json()
         return response
     }
@@ -18,7 +18,7 @@ export default class MoviesService {
         return response
     }
     postRateMovie = async (id: number, num: number) => {
-        const body = {value: num}
+        const body: object = {value: num}
         const response = await fetch(`${this.URL_API}/movie/${id}/rating?${this.API_KEY}&guest_session_id=${this.SESSION_ID}`, {
             method: 'POST',
             body: JSON.stringify(body),
@@ -28,7 +28,7 @@ export default class MoviesService {
         })
         return response
     }
-    getGenresList = async () => {
+    getGenresList = async (): Promise<IGenreList> => {
         let response = await (await fetch(`${this.URL_API}/genre/movie/list?${this.API_KEY}`)).json()
         return response
     }

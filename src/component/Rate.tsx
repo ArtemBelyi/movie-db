@@ -8,7 +8,7 @@ interface IRate {
     setRateMovie: Function
 }
 
-const RateMovie: React.FC<IRate> = (props) => {
+const RateMovie = (props: IRate) => {
     const [rate, setRate] = useState(Boolean(false || props.count))
 
     const onChange = (value: number) => {

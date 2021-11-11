@@ -7,7 +7,7 @@ interface IMovieList {
     setRateMovie: Function
 }
 
-const MovieList: React.FC<IMovieList> = (props) => {
+const MovieList = (props: IMovieList) => {
     return (
         <div className="movie-app__movie-list movie-list">
             {props.items.map(movie => <MovieCard key={movie.id} item={movie} setRateMovie={props.setRateMovie}/>)}

@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect, createContext } from 'react';
 import "antd/dist/antd.css";
 import { Skeleton, Alert, Tabs } from 'antd';
-import { IMovie, IGenreList } from '../types/data';
+import { IMovie, IGenreList, IGenre } from '../types/data';
 import MovieList from './MovieList';
 import InputMovie from './Input';
 import MoviesService from '../services/services';
@@ -13,10 +13,10 @@ const GenresContext = createContext<IGenreList>({
     genres: []
 })
 
-const App: React.FC = () => {
+const App = () => {
     const [dataMovies, setDataMovies] = useState<IMovie[]>([])
     const [rateList, setRateList] = useState<IMovie[]>([])
-    const [genrestList, setGenresList] = useState([])
+    const [genrestList, setGenresList] = useState<IGenre[]>([])
     const [query, setQuery] = useState<string>('')
     const [page, setPage] = useState<number>(1)
     const [totalPages, setTotalPages] = useState<number>(0)
@@ -32,6 +32,7 @@ const App: React.FC = () => {
                 setTotalPages(data.total_pages)
                 setLoading(false)
                 setAlert(false)
+                window.scrollTo(0, 0)
             })
         }).catch(onError)
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -87,7 +88,7 @@ const App: React.FC = () => {
                 <GenresContext.Provider value={context}>
                     <Tabs defaultActiveKey="1" centered>
                         <TabPane tab="Search" key="1">
-                        <InputMovie searchMovie={searchMovie}/>
+                        <InputMovie searchMovie={searchMovie} />
                             {errorAlert}
                             {skeleton}
                             {movieList}

@@ -10,7 +10,7 @@ interface IMovieCard {
 }
 
 
-const MovieCard: React.FC<IMovieCard> = (props) => {
+const MovieCard = (props: IMovieCard) => {
     const { id, original_title, release_date, overview, poster_path, vote_average, genre_ids, rating = 0 } = props.item
     const poster = poster_path || '/mUP8yF2Q7x97pITZvuarEiyR5g2.jpg'
     const border = {
