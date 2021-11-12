@@ -1,7 +1,5 @@
 import { ImovieBd, IGenreList } from "../types/data"
 
-
-
 export default class MoviesService {
     readonly URL_API: string = `https://api.themoviedb.org/3`
     readonly searchMovie: string = `https://api.themoviedb.org/3/search/movie`
