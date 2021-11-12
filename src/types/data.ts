@@ -28,4 +28,30 @@ interface IGenre {
 interface IGenreList {
     genres: IGenre[]
 }
-export type {IMovie, ImovieBd, IGenre, IGenreList}
+interface IstateMovie {
+    dataMovies: IMovie[],
+    rateList: IMovie[],
+    genrestList: IGenre[],
+    query: string,
+    page: number,
+    totalPages: number,
+    loading: boolean,
+    alert: boolean,
+
+}
+interface Iaction {
+    type: string, 
+    payload: any
+}
+const movieState: IstateMovie = {
+    dataMovies: [],
+    rateList: [],
+    genrestList: [],
+    query: '',
+    page: 1,
+    totalPages: 0,
+    loading: true,
+    alert: false
+}
+export type {IMovie, ImovieBd, IGenre, IGenreList, IstateMovie, Iaction }
+export { movieState }

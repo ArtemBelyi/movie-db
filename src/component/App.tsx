@@ -1,67 +1,60 @@
 import React from 'react';
-import { useState, useEffect, createContext } from 'react';
+import { useEffect, createContext, useReducer } from 'react';
 import "antd/dist/antd.css";
 import { Skeleton, Alert, Tabs } from 'antd';
-import { IMovie, IGenreList, IGenre } from '../types/data';
+import { IMovie, IGenreList, movieState } from '../types/data';
 import MovieList from './MovieList';
 import InputMovie from './Input';
 import MoviesService from '../services/services';
 import PaginationMovie from './Pagination';
+import reducer from '../context/reduce';
 
 
-const GenresContext = createContext<IGenreList>({
-    genres: []
-})
+const GenresContext = createContext<IGenreList>({genres: []})
 
 const App = () => {
-    const [dataMovies, setDataMovies] = useState<IMovie[]>([])
-    const [rateList, setRateList] = useState<IMovie[]>([])
-    const [genrestList, setGenresList] = useState<IGenre[]>([])
-    const [query, setQuery] = useState<string>('')
-    const [page, setPage] = useState<number>(1)
-    const [totalPages, setTotalPages] = useState<number>(0)
-    const [loading, setLoading] = useState<boolean>(true)
-    const [alert, setAlert] = useState<boolean>(false)
+
+    const [data, dispatch] = useReducer(reducer, movieState)
     const listMovie = new MoviesService()
     const { TabPane } = Tabs
     
     useEffect(() => {
         listMovie.getRateList().then((res) => {
-            listMovie.getResource(query, page).then((data) => {
-                setDataMovies(syncRate(data.results, res.results))
-                setTotalPages(data.total_pages)
-                setLoading(false)
-                setAlert(false)
+            listMovie.getResource(data.query, data.page).then((data) => {
+                dispatch({type: 'getMovies',  payload: syncRate(data.results, res.results)})
+                dispatch({type: 'getTotalPage', payload:  data.total_pages})
+                dispatch({type: 'loading', payload:  false})
+                dispatch({type: 'alert', payload:  false})
                 window.scrollTo(0, 0)
-            })
+            }).catch(onError)
         }).catch(onError)
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [query, page])
+    }, [data.query, data.page])
     useEffect(() => {
         listMovie.getRateList().then((data) => {
-            setRateList(data.results)
+            dispatch({type: 'getRateList', payload: data.results})
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     useEffect(() => {
         listMovie.getGenresList().then((data) => {
-            setGenresList(data.genres)
+            dispatch({type: 'genrestList', payload: data.genres})
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     const onError = ():void => {
-        setLoading(false)
-        setAlert(true)
+        dispatch({type: 'loading', payload:  false})
+        dispatch({type: 'alert', payload:  true})
     }
     const searchMovie = (str: string) => {
-        setQuery(str)
+        dispatch({type: 'setQuery', payload: str})
     }
     const changePage = (page: number) => {
-        setPage(page)
+        dispatch({type: 'setPage', payload: page})
     }
     const setRateMovie = (id: number, value: number) => {
         listMovie.postRateMovie(id, value).then(() => listMovie.getRateList().then((data) => {
-            setRateList(data.results) 
+            dispatch({type: 'getRateList', payload: data.results}) 
         }))
     }
     const findElem = (elem: any) => {
@@ -76,12 +69,12 @@ const App = () => {
         })
         return result
     }
-    const hasData: boolean = !(loading || alert)
-    const errorAlert: any = alert ? <Alert message="Error" description="Loading error" type="error" showIcon/> : null
-    const skeleton: any = loading ? <Skeleton paragraph={{ rows: 16 }}/> : null
-    const movieList: any = hasData ? <MovieList items={dataMovies} setRateMovie={setRateMovie}/> : null
+    const hasData: boolean = !(data.loading || data.alert)
+    const errorAlert: any = data.alert ? <Alert message="Error" description="Loading error" type="error" showIcon/> : null
+    const skeleton: any = data.loading ? <Skeleton paragraph={{ rows: 16 }}/> : null
+    const movieList: any = hasData ? <MovieList items={data.dataMovies} setRateMovie={setRateMovie}/> : null
     
-    const context: IGenreList = { genres: genrestList }
+    const context: IGenreList = { genres: data.genrestList }
     return (
         <div className="app">
             <div className="movie-app movie-app__container">
@@ -92,10 +85,10 @@ const App = () => {
                             {errorAlert}
                             {skeleton}
                             {movieList}
-                            {!!totalPages && (<PaginationMovie totalPages={totalPages} page={page} changePage={changePage}/>)}
+                            {!!data.totalPages && (<PaginationMovie totalPages={data.totalPages} page={data.page} changePage={changePage}/>)}
                         </TabPane>
                         <TabPane tab="Rated" key="2">
-                            <MovieList items={rateList} setRateMovie={setRateMovie}/>
+                            <MovieList items={data.rateList} setRateMovie={setRateMovie}/>
                         </TabPane>
                     </Tabs>
                 </GenresContext.Provider>
